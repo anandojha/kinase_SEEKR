@@ -1,0 +1,22 @@
+﻿JAK2-Ligand6 Preparation for SEEKR2 simulations:
+
+###############################################################
+Install the dependencies as under: 
+1. SEEKR2 (https://github.com/seekrcentral/seekr2)
+2. OpenMM
+3. Amber 
+4. BioPndas
+5. Other dependencies as in the python files (conda installable)
+###############################################################
+    1. python get_ions.py and follow the link to get the number of ions (Na+ and Cl-) to fill in the system_preparation_II.py.
+    2. python  system_preparation.py
+    3. python sample_equilibration.py (A small test run before equilibration.py)
+            a. Simulated annealing : topology file = system_TP4EW.parm7, coordinate file = system_TP4EW.inpcrd, simulation ouput file = system_annealing_output.pdb, simulation box vector file = annealing_simulation_box_vectors.pkl
+            b. NPT : topology file  = system_TP4EW.parm7, simulation ouput file = system_npt_output.pdb, initial PDB file = system_annealing_output_last_frame.pdb, simulation box vector file = npt_simulation_box_vectors.pkl
+            c. NVT : topology file  = system_TP4EW_I.parm7, simulation ouput file = system_nvt_output.pdb, initial PDB file = system_TP4EW_I.pdb, simulation box vector file = nvt_simulation_box_vectors.pkl
+   4. python equilibration.py > equilibration.out : Runs Simulated Annealing, NPT and NVT equilibration systematically and saves the final files as system_TP4EW_I.parm7, system_TP4EW_I.inpcrd and system_nvt_output_last_frame.pdb.
+   5. python prepare_SMD.py > prepare_SMD.out : Prepare the system for Steered Molecular Dynamics
+   6. python execute.py > execute.out (Imports the prepare.py script) : Run Steered Molecular Dynamics
+   7. python execute_seekr2.py > execute_seekr2.out : Creates a folder named system_seekr2 where SEEKR2 simulations must be performed 
+
+
